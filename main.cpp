@@ -8,18 +8,18 @@
 
 // Функция для чтения информации о студентах из файла
 QVector<Student> readStudentsFromFile(const QString& filePath) {
-    QFile file(filePath);  // Создание объекта QFile
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))  // Попытка открыть файл для чтения
-        return QVector<Student>();  // Возврат пустого QVector, если файл не удалось открыть
+    QFile file(filePath); 
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))  
+        return QVector<Student>();  
 
-    QTextStream in(&file);  // Создание QTextStream для чтения из файла
-    QVector<Student> students;  // Создание QVector для хранения студентов
-    while (!in.atEnd()) {  // Чтение файла до конца
-        QString line = in.readLine();  // Чтение одной строки из файла
-        QStringList fields = line.split('\"');  // Разделение строки на поля
-        QString name = fields[1];  // Получение имени студента
-        QString topic = fields[3];  // Получение темы
-        QDate date = QDate::fromString(fields[4].trimmed(), "yyyy.MM.dd");  // Получение даты
+    QTextStream in(&file);  
+    QVector<Student> students;  
+    while (!in.atEnd()) { 
+        QString line = in.readLine();  
+        QStringList fields = line.split('\"'); 
+        QString name = fields[1];  
+        QString topic = fields[3];  
+        QDate date = QDate::fromString(fields[4].trimmed(), "yyyy.MM.dd");  
 
         Student student(name, topic, date);  // Создание объекта Student
         students.append(student);  // Добавление студента в QVector
